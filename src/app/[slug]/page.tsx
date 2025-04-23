@@ -1,11 +1,9 @@
 import { ContentCard } from "@/entities/content-card"
 
-export default async function ContentListPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const { slug } = await params
+type Params = Promise<{ slug: string }>
+
+export default async function ContentListPage(props: { params: Params }) {
+  const params = await props.params
 
   return (
     <div className="container py-12">
@@ -14,7 +12,7 @@ export default async function ContentListPage({
           <ContentCard
             id={index}
             key={index}
-            href={`/${slug}/${index}`}
+            href={`/${params.slug}/${index}`}
             title={`Контент #${index}`}
           />
         ))}

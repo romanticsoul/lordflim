@@ -1,19 +1,17 @@
 import Image from "next/image"
 import { ContentCard } from "@/entities/content-card"
 
-export default async function ContentPage({
-  params,
-}: {
-  params: { slug: string; id: string }
-}) {
-  const { slug, id } = await params
+type Params = Promise<{ slug: string; id: string }>
+
+export default async function ContentPage(props: { params: Params }) {
+  const params = await props.params
 
   return (
     <main className="container py-12">
       <div className="grid grid-cols-10 gap-4">
         <div className="col-span-3">
           <Image
-            src={`https://placehold.co/300x400.svg?text=Content+%23${id}`}
+            src={`https://placehold.co/300x400.svg?text=Content+%23${params.id}`}
             alt="Movie poster"
             width={300}
             height={400}
@@ -22,7 +20,7 @@ export default async function ContentPage({
         </div>
         <div className="col-span-7">
           <h1 className="mb-2 text-3xl font-black">
-            Контент #{id} смотреть онлайн
+            Контент #{params.id} смотреть онлайн
           </h1>
           <div className="mb-6 flex gap-2">
             <div className="rounded-full border px-4 py-2 text-xs font-medium">
@@ -47,7 +45,7 @@ export default async function ContentPage({
             </li>
             <li className="flex items-center gap-2 font-medium">
               <span className="font-bold">Оригинальное название:</span> Content
-              #{id}
+              #{params.id}
             </li>
             <li className="flex items-center gap-2 font-medium">
               <span className="font-bold">Жанр:</span> ##########, ############
@@ -78,7 +76,7 @@ export default async function ContentPage({
             <ContentCard
               id={index}
               key={index}
-              href={`/${slug}/${index}`}
+              href={`/${params.slug}/${index}`}
               title={`Контент #${index}`}
             />
           ))}
