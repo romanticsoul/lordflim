@@ -1,0 +1,29 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "files.autoSave": "onFocusChange",
+  "tailwindCSS.classFunctions": [
+    "tw",
+    "clsx",
+    "cva",
+    "cx",
+    "tv",
+    "twMerge",
+    "twJoin"
+  ],
+  "tailwindCSS.classAttributes": [
+    "variantClasses",
+    "class",
+    "className",
+    "ngClass",
+    "class:list"
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "js/ts.implicitProjectConfig.checkJs": false
+}
