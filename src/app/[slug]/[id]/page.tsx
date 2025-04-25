@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { ContentCard } from "@/entities/content-card"
+import { Player } from "@/widgets/player"
 
 type Params = Promise<{ slug: string; id: string }>
 
@@ -61,13 +62,16 @@ export default async function ContentPage(props: { params: Params }) {
         </div>
       </div>
       <div className="my-12">
-        <Image
+        {/*  */}
+        <Player />
+        {/*  */}
+        {/* <Image
           src="https://placehold.co/600x400/000000/FFFFFF.svg?text=Video+Player"
           alt="Movie poster"
           width={300}
           height={400}
           className="aspect-video w-full rounded-lg object-cover"
-        />
+        /> */}
       </div>
       <div>
         <h2 className="mb-4 text-xl font-bold">Смотреть похожие</h2>

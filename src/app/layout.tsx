@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { ThemeProvider } from "@/shared/ui/theme-provider"
 import { Inter } from "next/font/google"
 import { Header } from "@/widgets/header"
@@ -36,6 +37,10 @@ export default function RootLayout({
           {children}
           <Footer />
         </ThemeProvider>
+        <Script
+          src="https://kinobox.tv/kinobox.min.js"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   )
