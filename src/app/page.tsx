@@ -5,12 +5,7 @@ export default function Home() {
     <main className="container py-12">
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {Array.from({ length: 25 }).map((_, index) => (
-          <ContentCard
-            key={index}
-            id={index}
-            href={`/movies/${index}`}
-            title={`Контент #${index}`}
-          />
+          <ContentCard key={index} kinopoiskId={1} title={`Контент #${index}`} />
         ))}
       </div>
     </main>

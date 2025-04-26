@@ -24,12 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body
-        className={`${fontSans.variable} ${fontSans.className} overflow-scroll antialiased`}
-      >
+      <body className={`${fontSans.variable} ${fontSans.className} overflow-y-scroll antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
@@ -37,10 +35,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </ThemeProvider>
-        <Script
-          src="https://kinobox.tv/kinobox.min.js"
-          strategy="beforeInteractive"
-        />
+        <Script src="https://kinobox.tv/kinobox.min.js" strategy="beforeInteractive" />
       </body>
     </html>
   )
