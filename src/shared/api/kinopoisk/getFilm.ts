@@ -62,10 +62,11 @@ export interface Film {
 }
 
 export async function getFilm(kinopoiskId: number) {
-  const res = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${kinopoiskId}`, {
+  const url = `${process.env.KINOPOISK_API_URL}/api/v2.2/films/${kinopoiskId}`
+  const res = await fetch(url, {
     method: "GET",
     headers: {
-      "X-API-KEY": "5384c918-c891-4c75-9413-466c383c5441",
+      "X-API-KEY": process.env.KINOPOISK_API_KEY!,
       "Content-Type": "application/json",
     },
   })
