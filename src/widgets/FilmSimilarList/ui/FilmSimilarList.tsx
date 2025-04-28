@@ -1,23 +1,24 @@
+import type { MovieDtoV14 } from "@/shared/lib/kinopoisk/generated"
 import { ContentCard } from "@/entities/content-card"
-import { getFilmSimilarList } from "../api/index"
+// import { getFilmSimilarList } from "../api/index"
 
 type FilmSimilarListProps = {
-  kinopoiskId: number
+  similar: MovieDtoV14["similarMovies"]
 }
 
-export default async function FilmSimilarList({ kinopoiskId }: FilmSimilarListProps) {
-  const films = await getFilmSimilarList(kinopoiskId)
+export default async function FilmSimilarList({ similar }: FilmSimilarListProps) {
+  // const films = await getFilmSimilarList(kinopoiskId)
 
-  if (!films) return <div>Ошибка загрузки</div>
+  if (!similar) return <div>Ошибка загрузки</div>
 
   return (
     <div className="grid grid-cols-5 gap-4">
-      {films.items.splice(0, 5).map((film) => (
+      {similar.splice(0, 5).map((movie) => (
         <ContentCard
-          key={film.filmId}
-          kinopoiskId={film.filmId}
-          imageUrl={film.posterUrl || film.posterUrlPreview}
-          title={film.nameRu || film.nameEn || film.nameOriginal || "Неизвестный фильм"}
+          key={movie.id}
+          kinopoiskId={movie.id}
+          imageUrl={movie.poster?.url || movie.poster?.previewUrl}
+          title={movie.name || movie.enName || movie.alternativeName}
         />
       ))}
     </div>

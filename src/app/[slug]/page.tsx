@@ -51,6 +51,8 @@ type FetchFilmsProps = {
 async function fetchFilms(queries: FetchFilmsProps) {
   const queryParams = new URLSearchParams()
 
+  queryParams.append("ratingFrom", "6")
+
   Object.entries(queries).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       queryParams.append(key, value.toString())

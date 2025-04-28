@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/shared/ui/card"
 type ContentCardProps = {
   kinopoiskId: number
   title?: string | null
-  imageUrl?: string
+  imageUrl?: string | null
 }
 
 export function ContentCard(props: ContentCardProps) {
