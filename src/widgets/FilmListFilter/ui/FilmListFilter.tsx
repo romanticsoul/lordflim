@@ -3,6 +3,7 @@ import { SelectGenre } from "./SelectGenre"
 import { SelectCountry } from "./SelectCountry"
 import { SelectYear } from "./SelectYear"
 import { SelectSort } from "./SelectSort"
+import Link from "next/link"
 
 export async function FilmListFilter() {
   const genresAndCountries = await fetchGenresAndCountries()
@@ -17,6 +18,7 @@ export async function FilmListFilter() {
       <SelectCountry countries={genresAndCountries.countries} />
       <SelectYear />
       <SelectSort />
+      <Link href={`?country=1`}>ГОД</Link>
     </div>
   )
 }

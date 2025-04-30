@@ -6,7 +6,7 @@ type FilmSimilarListProps = {
   similar: MovieDtoV14["similarMovies"]
 }
 
-export default async function FilmSimilarList({ similar }: FilmSimilarListProps) {
+export async function FilmSimilarList({ similar }: FilmSimilarListProps) {
   // const films = await getFilmSimilarList(kinopoiskId)
 
   if (!similar) return <div>Ошибка загрузки</div>

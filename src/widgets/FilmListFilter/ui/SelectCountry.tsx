@@ -17,12 +17,21 @@ type SelectCountryProps = {
 
 export function SelectCountry(props: SelectCountryProps) {
   const countries = props.countries
-  const [{ county }, setFilter] = useFilterQueryStates()
+
+  const [filter, setFilter] = useFilterQueryStates()
 
   return (
     <Select
-      defaultValue={county ? county.toString() : "all"}
-      onValueChange={(value) => setFilter({ county: Number(value) || null })}
+      defaultValue={filter.county ? filter.county.toString() : "all"}
+      onValueChange={(value) => {
+        // const q = filterSerializer({
+        // ...filter,
+        // county: Number(value) || null,
+        // })
+
+        // router.push(q)
+        setFilter({ county: Number(value) || null })
+      }}
     >
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Страна" />

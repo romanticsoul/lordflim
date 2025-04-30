@@ -1,3 +1,1 @@
-import FilmSimilarList from './FilmSimilarList.tsx'
-
-export { FilmSimilarList }
+export { FilmSimilarList } from "./FilmSimilarList"

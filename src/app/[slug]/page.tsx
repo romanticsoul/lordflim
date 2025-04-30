@@ -1,6 +1,10 @@
 import type { SearchParams } from "nuqs/server"
 import { ContentCard } from "@/entities/content-card"
 import { FilmListFilter, loadFilterSearchParams } from "@/widgets/FilmListFilter"
+import { Suspense } from "react"
+import type { SortEnum } from "@/widgets/FilmListFilter/model"
+
+export const dynamic = "force-dynamic"
 
 type ContentListPageProps = {
   params: Promise<{ slug: string }>
@@ -73,9 +77,17 @@ async function fetchFilms(queries: FetchFilmsProps) {
   return data
 }
 
-export default async function ContentListPage(props: ContentListPageProps) {
-  const searchParams = await loadFilterSearchParams(props.searchParams)
-
+async function TempList({
+  searchParams,
+}: {
+  searchParams: {
+    genre: number | null
+    county: number | null
+    yf: number | null
+    yt: number | null
+    sort: SortEnum
+  }
+}) {
   const films = await fetchFilms({
     countries: searchParams.county,
     genres: searchParams.genre,
@@ -84,22 +96,33 @@ export default async function ContentListPage(props: ContentListPageProps) {
     yearTo: searchParams.yt,
   })
 
+  if (!films) return <div>Не найдено</div>
+
+  return (
+    <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      {films.items.map((film) => (
+        <ContentCard
+          imageUrl={film.posterUrl || film.posterUrlPreview}
+          key={film.kinopoiskId}
+          kinopoiskId={film.kinopoiskId}
+          title={`${film.ratingKinopoisk} ${film.nameRu || film.nameEn || film.nameOriginal}`}
+        />
+      ))}
+    </div>
+  )
+}
+
+export default async function ContentListPage(props: ContentListPageProps) {
+  const searchParams = await loadFilterSearchParams(props.searchParams)
+  const key = JSON.stringify(searchParams)
+
   return (
     <div className="container py-12">
       {JSON.stringify(searchParams)}
       <FilmListFilter />
-      {films && (
-        <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {films.items.map((film) => (
-            <ContentCard
-              imageUrl={film.posterUrl || film.posterUrlPreview}
-              key={film.kinopoiskId}
-              kinopoiskId={film.kinopoiskId}
-              title={`${film.ratingKinopoisk} ${film.nameRu || film.nameEn || film.nameOriginal}`}
-            />
-          ))}
-        </div>
-      )}
+      <Suspense key={key} fallback={<div>Suspense loading....</div>}>
+        <TempList searchParams={searchParams} />
+      </Suspense>
     </div>
   )
 }
